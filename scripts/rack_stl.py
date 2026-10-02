@@ -29,7 +29,11 @@ for px in (0, RACK_W - POST):
     for py in (0, RACK_D - POST):
         box(px, py, 0, px + POST, py + POST, height)
 box(0, 0, 0, RACK_W, RACK_D, 8)
-box(0, 0, height - 8, RACK_W, RACK_D, height)
+# open top frame so the nodes stay visible from above
+box(0, 0, height - 8, RACK_W, POST, height)
+box(0, RACK_D - POST, height - 8, RACK_W, RACK_D, height)
+box(0, 0, height - 8, POST, RACK_D, height)
+box(RACK_W - POST, 0, height - 8, RACK_W, RACK_D, height)
 # rack ears with screw tabs on the front posts
 for i in range(9):
     z = 16 + i * (height - 32) / 8
@@ -58,7 +62,7 @@ for k in range(8):
     px = x_in + 18 + k * 18
     box(px, 6.4, z + 8, px + 13, 8, z + 19)
 
-with open("homelab.stl", "w") as f:
+with open("assets/homelab.stl", "w") as f:
     f.write("solid homelab\n")
     for (nx, ny, nz), a, b, c in tris:
         f.write(f"facet normal {nx} {ny} {nz}\nouter loop\n")
