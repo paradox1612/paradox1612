@@ -69,7 +69,11 @@ def text_block(fg, sub, kicker, line1, line2, line3, hint, hint_col):
     <tspan x="64" y="244">{line2}</tspan>
     <tspan x="64" y="280">{line3}</tspan>
   </text>
-  <text x="64" y="336" font-family="{MONO}" font-size="14" fill="{hint_col}">{hint}</text>"""
+  <text font-family="{MONO}" font-size="14" fill="{hint_col}">{hint_lines(hint)}</text>"""
+
+
+def hint_lines(hint):
+    return "".join(f'<tspan x="64" y="{336 + i * 22}">{line}</tspan>' for i, line in enumerate(hint.split(" | ")))
 
 
 def day():
@@ -100,13 +104,19 @@ def night(signal_on=True):
             continue
         x = cx + t * rx * .84
         y0, y1 = cy - top * ry * .78, cy - bot * ry * .78
-        d = rnd.uniform(.7, 1.4)
-        delay = rnd.uniform(0, 1.2)
+        d = 1.1
+        delay = (i % 8) * .14
         bars.append(f'<rect x="{x-1.2:.1f}" y="{y0:.1f}" width="2.4" height="{y1-y0:.1f}" rx="1.2" fill="#0b0f17" '
                     f'style="transform-origin:{x:.1f}px {cy}px;animation:talk {d:.2f}s {delay:.2f}s ease-in-out infinite alternate"/>')
+    pts = []
+    while len(pts) < 70:
+        sx, sy = rnd.uniform(0, W), rnd.uniform(20, 330)
+        if 40 < sx < 680 and 70 < sy < 350:
+            continue  # keep the text block clear
+        pts.append((sx, sy))
     stars = "".join(
-        f'<circle cx="{rnd.uniform(0, W):.0f}" cy="{rnd.uniform(20, 330):.0f}" r="{rnd.choice([.6, .8, 1.1])}" fill="#cfd6e6" '
-        f'style="animation:tw {rnd.uniform(2, 6):.1f}s {rnd.uniform(0, 5):.1f}s infinite"/>' for _ in range(70))
+        f'<circle cx="{sx:.0f}" cy="{sy:.0f}" r="{rnd.choice([.6, .8, 1.1])}" fill="#cfd6e6" '
+        f'style="animation:tw {rnd.uniform(2, 6):.1f}s {rnd.uniform(0, 5):.1f}s infinite"/>' for sx, sy in pts)
     b = "".join(f'<rect x="{x}" y="{GROUND-h}" width="{w}" height="{h}" fill="#0e1320"/>' for x, w, h in blds)
     src_x, src_y = 663 + 12, GROUND - 186
     lamp = f'<rect x="{src_x-9}" y="{src_y-10}" width="18" height="10" rx="2" fill="#2a3142"/>'
@@ -117,12 +127,12 @@ def night(signal_on=True):
   <ellipse cx="{cx}" cy="{cy}" rx="{rx+40}" ry="{ry+30}" fill="url(#halo)"/>
   <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="url(#spot)"/>
   <g>{''.join(bars)}</g>"""
-        hint = "Click the signal to see what I am building."
+        hint = "Click the signal to see what I am building. | Switch GitHub to light mode for the day shift."
     else:
-        hint = "The signal is off. Click anyway: my agent takes calls all night."
+        hint = "The signal is off. | Switch GitHub to light mode for the day shift."
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="By night, I become Batman and build voice AI agents, a media player, and a homelab to run them all.">
   <style>
-    @keyframes talk {{ from {{ transform: scaleY(.72) }} to {{ transform: scaleY(1) }} }}
+    @keyframes talk {{ from {{ transform: scaleY(.86) }} to {{ transform: scaleY(1) }} }}
     @keyframes tw {{ 0%,100% {{ opacity:.9 }} 50% {{ opacity:.2 }} }}
     @keyframes flick {{ 0%,92%,100% {{ opacity:.85 }} 94% {{ opacity:.1 }} 96% {{ opacity:.7 }} }}
   </style>
