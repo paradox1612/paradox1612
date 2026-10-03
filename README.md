@@ -10,6 +10,8 @@
 My AI agent picks up day or night, tells you what I'm building, and takes a message. No signup, no secret identity required.
 Bonus round: try to get it to reveal my secret identity (my personal number).
 
+https://github.com/user-attachments/assets/12419fe6-15ef-494b-930f-c6bc31d59799
+
 It runs on **[VLayer](https://vlayers.ai/?utm_source=github&utm_medium=profile&utm_campaign=cta)**, the open SDK I'm building for production AI phone agents: a utility belt for voice AI. One TypeScript file per agent, $0.05 a minute flat, and you bring your own model and voice keys.
 
 ```bash
