@@ -1,11 +1,22 @@
-<a href="https://vlayers.ai">
+<a href="https://vlayers.ai/?utm_source=github&utm_medium=profile&utm_campaign=bat-signal">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/night.svg">
     <img src="assets/day.svg" width="100%" alt="By day, I build full-stack enterprise LLM applications. By night, I become Batman and build voice AI agents, a media player, and a homelab to run them all.">
   </picture>
 </a>
 
-**[VLayer](https://vlayers.ai)** is an open SDK for production AI phone agents: `npm i @voicelayer/sdk`
+### Ring the Batphone: (570) 605-4473
+
+My AI agent picks up day or night, tells you what I'm building, and takes a message. No signup, no secret identity required.
+Bonus round: try to get it to reveal my secret identity (my personal number).
+
+It runs on **[VLayer](https://vlayers.ai/?utm_source=github&utm_medium=profile&utm_campaign=cta)**, the open SDK I'm building for production AI phone agents: a utility belt for voice AI. One TypeScript file per agent, $0.05 a minute flat, and you bring your own model and voice keys.
+
+```bash
+npm i @voicelayer/sdk
+```
+
+[Build your own Batphone →](https://vlayers.ai/auth/sign-up?utm_source=github&utm_medium=profile&utm_campaign=cta)
 
 **[Tuvora](https://tuvora.co)** is an IPTV player for your own playlists on phone, TV, Mac and Windows.
 

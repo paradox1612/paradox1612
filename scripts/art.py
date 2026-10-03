@@ -73,7 +73,10 @@ def text_block(fg, sub, kicker, line1, line2, line3, hint, hint_col):
 
 
 def hint_lines(hint):
-    return "".join(f'<tspan x="64" y="{336 + i * 22}">{line}</tspan>' for i, line in enumerate(hint.split(" | ")))
+    # the first line is the call to action (the agent's number), so it reads first
+    bold = ' font-weight="700" font-size="16"'
+    return "".join(f'<tspan x="64" y="{336 + i * 22}"{bold if i == 0 else ""}>{line}</tspan>'
+                   for i, line in enumerate(hint.split(" | ")))
 
 
 def day():
@@ -85,7 +88,7 @@ def day():
   <circle cx="790" cy="200" r="64" fill="none" stroke="#1d1d1f" stroke-width="1.1"/>
   <circle cx="790" cy="200" r="64" fill="#e9e4d8" opacity=".55"/>
   {text_block("#1d1d1f", "#8a857b", "KUSHKUMAR PATEL", "By day,", "I build full-stack enterprise", "LLM applications.",
-              "There is more after dark. Switch GitHub to dark mode.", "#8a857b")}
+              "The Batphone works days too: (570) 605-4473 | There is more after dark. Switch GitHub to dark mode.", "#8a857b")}
   <g>{b}{windows(blds, .22, rnd, False)}</g>
   <line x1="0" y1="{GROUND}" x2="{W}" y2="{GROUND}" stroke="#1d1d1f" stroke-width="1.1"/>
 </svg>"""
@@ -127,7 +130,7 @@ def night(signal_on=True):
   <ellipse cx="{cx}" cy="{cy}" rx="{rx+40}" ry="{ry+30}" fill="url(#halo)"/>
   <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="url(#spot)"/>
   <g>{''.join(bars)}</g>"""
-        hint = "Click the signal to see what I am building. | Switch GitHub to light mode for the day shift."
+        hint = "Ring the Batphone: (570) 605-4473 | My AI agent picks up. Click the signal to build yours."
     else:
         hint = "The signal is off. | Switch GitHub to light mode for the day shift."
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="By night, I become Batman and build voice AI agents, a media player, and a homelab to run them all.">
